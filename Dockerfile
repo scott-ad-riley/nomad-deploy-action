@@ -1,7 +1,7 @@
 FROM vancluever/nomad
 
 WORKDIR /nomad-deploy
-COPY deploy /nomad-deploy/my_script
+COPY deploy /nomad-deploy/deploy
 COPY . /nomad-deploy
 
-ENTRYPOINT ["/app/my_script"]
+ENTRYPOINT ["/app/deploy"]

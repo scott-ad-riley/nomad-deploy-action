@@ -25,7 +25,7 @@ jobs:
           job: path/to/your/nomad/job/file
 ```
 
-## Parameters
+## Parameters
 
 * `token`: passed as `-token=` to the `nomad job run` command ([see here how to get one](https://www.nomadproject.io/guides/security/acl.html#acl-tokens))
 * `address`: public address of a nomad server (passed as `-address=`)

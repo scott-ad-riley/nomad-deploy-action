@@ -3,11 +3,14 @@
 nomad_token=$1
 nomad_address=$2
 nomad_job_file_path=$3
+additional_vars=$4
 
 if [ -f "$nomad_job_file_path" ]; then
-  echo "$nomad_job_file_path exist"
+  echo "$nomad_job_file_path exists"
   echo would run:
   echo nomad job run "$nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+  echo with additional vars:
+  echo "$additional_vars"
 else
   echo "$nomad_job_file_path does not exist"
   echo ls:

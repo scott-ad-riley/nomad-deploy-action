@@ -4,4 +4,4 @@ WORKDIR /nomad-deploy
 COPY deploy /nomad-deploy/deploy
 COPY . /nomad-deploy
 
-ENTRYPOINT ["/app/deploy"]
+ENTRYPOINT ["/nomad-deploy/deploy"]

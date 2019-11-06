@@ -4,5 +4,14 @@ nomad_token=$1
 nomad_address=$2
 nomad_job_file_path=$3
 
-echo would run:
-echo nomad job run "$nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+if [ -f "$nomad_job_file_path" ]; then
+  echo "$nomad_job_file_path exist"
+  echo would run:
+  echo nomad job run "$nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+else
+  echo "$nomad_job_file_path does not exist"
+  echo ls:
+  ls
+fi
+
+

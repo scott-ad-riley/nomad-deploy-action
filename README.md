@@ -1,6 +1,6 @@
 # Nomad Deploy
 
-Small GitHub Action that runs `nomad job run ...`.
+Small GitHub Action that runs `nomad job run ...` with the Nomad CLI.
 
 ## Usage
 
@@ -30,3 +30,8 @@ jobs:
 * `token`: passed as `-token=` to the `nomad job run` command ([see here how to get one](https://www.nomadproject.io/guides/security/acl.html#acl-tokens))
 * `address`: public address of a nomad server (passed as `-address=`)
 * `job`: path to the nomad job specification to run ([defined according to the spec here](https://www.nomadproject.io/docs/job-specification/index.html))
+
+## Todo
+
+- [ ] Verify it works
+- [ ] Probably something else

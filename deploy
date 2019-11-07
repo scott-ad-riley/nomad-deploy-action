@@ -40,5 +40,3 @@ else
   echo "$nomad_job_file_path does not exist"
   exit 1
 fi
-
-

@@ -33,6 +33,8 @@ if [ -f "$nomad_job_file_path" ]; then
   echo "$nomad_job_file_path exists"
   echo running export "${additional_vars?}"
   export "${additional_vars?}"
+  echo "$WEB_IMAGE_TAG"
+  echo "$GITHUB_TOKEN"
   produce_replaced_nomad_file
   echo with additional vars:
   echo "$additional_vars"

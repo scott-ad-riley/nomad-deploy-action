@@ -1,20 +1,47 @@
-#! /usr/bin/env sh
+#! /usr/bin/env bash
 
 nomad_token=$1
 nomad_address=$2
 nomad_job_file_path=$3
+replaced_nomad_job_file_path=/tmp/nomad-deploy/jobs/$(basename "$3")
+# additional_vars=$(echo -n "$4" | tr -d '\n')
 additional_vars=$4
+
+produce_replaced_nomad_file() {
+  # Make the temporary directory and create the new job file
+  mkdir -p /tmp/nomad-deploy/jobs
+  touch "$replaced_nomad_job_file_path"
+  if [[ $additional_vars == "" ]]
+  then
+    echo 'No additional vars found'
+    # Just copy the job file straight across, no replacement of env vars
+    cat "$nomad_job_file_path" > "$replaced_nomad_job_file_path"
+  else
+    local additional_vars_array=("$additional_vars")
+    local keys_to_replace=()
+    for pair in ${additional_vars_array[*]}
+    do
+      # collect the keys_to_replace of each additional var in an array
+      keys_to_replace+=("\$${pair%=*}")
+    done
+    # replace the contents of the job file with the required env vars
+    envsubst "${keys_to_replace[*]}" > "$replaced_nomad_job_file_path" < "$nomad_job_file_path"
+  fi
+}
 
 if [ -f "$nomad_job_file_path" ]; then
   echo "$nomad_job_file_path exists"
-  echo would run:
-  echo nomad job run "$nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+  export "${additional_vars?}"
+  produce_replaced_nomad_file
   echo with additional vars:
   echo "$additional_vars"
+  echo job file with replaced vars:
+  cat "$replaced_nomad_job_file_path"
+  echo would run:
+  echo nomad job run "$replaced_nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
 else
   echo "$nomad_job_file_path does not exist"
-  echo ls:
-  ls
+  exit 1
 fi
 
 

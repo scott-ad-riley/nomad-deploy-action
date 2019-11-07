@@ -31,6 +31,7 @@ produce_replaced_nomad_file() {
 
 if [ -f "$nomad_job_file_path" ]; then
   echo "$nomad_job_file_path exists"
+  echo running export "${additional_vars?}"
   export "${additional_vars?}"
   produce_replaced_nomad_file
   echo with additional vars:

@@ -34,7 +34,9 @@ if [ -f "$nomad_job_file_path" ]; then
   # export each of the additional_vars
   for pair in $additional_vars; do export "${pair?}"; done
   produce_replaced_nomad_file
-  nomad job run "$replaced_nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+  export NOMAD_ADDR="$nomad_address"
+  export NOMAD_TOKEN="$nomad_address"
+  nomad job run "$replaced_nomad_job_file_path"
 else
   echo "$nomad_job_file_path does not exist"
   exit 1

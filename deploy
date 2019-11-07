@@ -31,17 +31,10 @@ produce_replaced_nomad_file() {
 
 if [ -f "$nomad_job_file_path" ]; then
   echo "$nomad_job_file_path exists"
-  echo running export "${additional_vars?}"
+  # export each of the additional_vars
   for pair in $additional_vars; do export "${pair?}"; done
-  echo "$WEB_IMAGE_TAG"
-  echo "$GITHUB_TOKEN"
   produce_replaced_nomad_file
-  echo with additional vars:
-  echo "$additional_vars"
-  echo job file with replaced vars:
-  cat "$replaced_nomad_job_file_path"
-  echo would run:
-  echo nomad job run "$replaced_nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
+  nomad job run "$replaced_nomad_job_file_path" "-address=$nomad_address" "-token=$nomad_token"
 else
   echo "$nomad_job_file_path does not exist"
   exit 1

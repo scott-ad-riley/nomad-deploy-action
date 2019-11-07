@@ -4,7 +4,6 @@ nomad_token=$1
 nomad_address=$2
 nomad_job_file_path=$3
 replaced_nomad_job_file_path=/tmp/nomad-deploy/jobs/$(basename "$3")
-# additional_vars=$(echo -n "$4" | tr -d '\n')
 additional_vars=$4
 
 produce_replaced_nomad_file() {

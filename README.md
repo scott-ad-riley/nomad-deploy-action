@@ -36,5 +36,5 @@ jobs:
 
 ## Todo
 
-- [ ] Verify it works
+- [x] Verify it works
 - [ ] Probably something else
